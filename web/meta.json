@@ -1,0 +1,553 @@
+{
+  "title": "Customer Churn Predictor",
+  "subtitle": "Predicts how likely a telecom customer is to cancel their subscription, so a retention team can contact the right people first.",
+  "tags": [
+    "Classification",
+    "scikit-learn",
+    "Logistic Regression",
+    "Cross-validation",
+    "ONNX"
+  ],
+  "task": "classification",
+  "classes": [
+    0,
+    1
+  ],
+  "positive_class": 1,
+  "output_label": "Probability this customer leaves",
+  "verdicts": [
+    "Low risk \u2014 likely to stay",
+    "Medium risk \u2014 worth a check-in",
+    "High risk \u2014 contact soon"
+  ],
+  "thresholds": [
+    0.3,
+    0.6
+  ],
+  "result_note": "Try switching Contract to \u201cTwo year\u201d or adding Tech support and watch the risk drop.",
+  "features": [
+    {
+      "name": "gender",
+      "label": "Gender",
+      "type": "category",
+      "options": [
+        "Female",
+        "Male"
+      ],
+      "default": "Male"
+    },
+    {
+      "name": "SeniorCitizen",
+      "label": "Senior citizen",
+      "type": "category",
+      "options": [
+        "No",
+        "Yes"
+      ],
+      "default": "No"
+    },
+    {
+      "name": "Partner",
+      "label": "Has partner",
+      "type": "category",
+      "options": [
+        "No",
+        "Yes"
+      ],
+      "default": "No"
+    },
+    {
+      "name": "Dependents",
+      "label": "Has dependents",
+      "type": "category",
+      "options": [
+        "No",
+        "Yes"
+      ],
+      "default": "No"
+    },
+    {
+      "name": "tenure",
+      "label": "Tenure",
+      "help": "months",
+      "type": "number",
+      "min": 0.0,
+      "max": 72.0,
+      "step": 1,
+      "default": 29
+    },
+    {
+      "name": "PhoneService",
+      "label": "Phone service",
+      "type": "category",
+      "options": [
+        "No",
+        "Yes"
+      ],
+      "default": "Yes"
+    },
+    {
+      "name": "MultipleLines",
+      "label": "Multiple lines",
+      "type": "category",
+      "options": [
+        "No",
+        "No phone service",
+        "Yes"
+      ],
+      "default": "No"
+    },
+    {
+      "name": "InternetService",
+      "label": "Internet service",
+      "type": "category",
+      "options": [
+        "DSL",
+        "Fiber optic",
+        "No"
+      ],
+      "default": "Fiber optic"
+    },
+    {
+      "name": "OnlineSecurity",
+      "label": "Online security",
+      "type": "category",
+      "options": [
+        "No",
+        "No internet service",
+        "Yes"
+      ],
+      "default": "No"
+    },
+    {
+      "name": "OnlineBackup",
+      "label": "Online backup",
+      "type": "category",
+      "options": [
+        "No",
+        "No internet service",
+        "Yes"
+      ],
+      "default": "No"
+    },
+    {
+      "name": "DeviceProtection",
+      "label": "Device protection",
+      "type": "category",
+      "options": [
+        "No",
+        "No internet service",
+        "Yes"
+      ],
+      "default": "No"
+    },
+    {
+      "name": "TechSupport",
+      "label": "Tech support",
+      "type": "category",
+      "options": [
+        "No",
+        "No internet service",
+        "Yes"
+      ],
+      "default": "No"
+    },
+    {
+      "name": "StreamingTV",
+      "label": "Streaming TV",
+      "type": "category",
+      "options": [
+        "No",
+        "No internet service",
+        "Yes"
+      ],
+      "default": "No"
+    },
+    {
+      "name": "StreamingMovies",
+      "label": "Streaming movies",
+      "type": "category",
+      "options": [
+        "No",
+        "No internet service",
+        "Yes"
+      ],
+      "default": "No"
+    },
+    {
+      "name": "Contract",
+      "label": "Contract",
+      "type": "category",
+      "options": [
+        "Month-to-month",
+        "One year",
+        "Two year"
+      ],
+      "default": "Month-to-month"
+    },
+    {
+      "name": "PaperlessBilling",
+      "label": "Paperless billing",
+      "type": "category",
+      "options": [
+        "No",
+        "Yes"
+      ],
+      "default": "Yes"
+    },
+    {
+      "name": "PaymentMethod",
+      "label": "Payment method",
+      "type": "category",
+      "options": [
+        "Bank transfer (automatic)",
+        "Credit card (automatic)",
+        "Electronic check",
+        "Mailed check"
+      ],
+      "default": "Electronic check"
+    },
+    {
+      "name": "MonthlyCharges",
+      "label": "Monthly charges",
+      "help": "USD",
+      "type": "number",
+      "min": 18.4,
+      "max": 118.75,
+      "step": "any",
+      "default": 70.5
+    },
+    {
+      "name": "TotalCharges",
+      "label": "Total charges",
+      "help": "USD",
+      "type": "number",
+      "min": 0.0,
+      "max": 8684.8,
+      "step": "any",
+      "default": 1394.925
+    }
+  ],
+  "examples": [
+    {
+      "gender": "Male",
+      "SeniorCitizen": "No",
+      "Partner": "Yes",
+      "Dependents": "Yes",
+      "tenure": 17,
+      "PhoneService": "No",
+      "MultipleLines": "No phone service",
+      "InternetService": "DSL",
+      "OnlineSecurity": "Yes",
+      "OnlineBackup": "No",
+      "DeviceProtection": "Yes",
+      "TechSupport": "No",
+      "StreamingTV": "Yes",
+      "StreamingMovies": "No",
+      "Contract": "One year",
+      "PaperlessBilling": "No",
+      "PaymentMethod": "Credit card (automatic)",
+      "MonthlyCharges": 44.45,
+      "TotalCharges": 792.15
+    },
+    {
+      "gender": "Male",
+      "SeniorCitizen": "No",
+      "Partner": "Yes",
+      "Dependents": "No",
+      "tenure": 61,
+      "PhoneService": "Yes",
+      "MultipleLines": "No",
+      "InternetService": "Fiber optic",
+      "OnlineSecurity": "No",
+      "OnlineBackup": "Yes",
+      "DeviceProtection": "Yes",
+      "TechSupport": "Yes",
+      "StreamingTV": "No",
+      "StreamingMovies": "Yes",
+      "Contract": "Month-to-month",
+      "PaperlessBilling": "No",
+      "PaymentMethod": "Credit card (automatic)",
+      "MonthlyCharges": 94.15,
+      "TotalCharges": 5731.85
+    },
+    {
+      "gender": "Male",
+      "SeniorCitizen": "No",
+      "Partner": "Yes",
+      "Dependents": "Yes",
+      "tenure": 72,
+      "PhoneService": "Yes",
+      "MultipleLines": "Yes",
+      "InternetService": "DSL",
+      "OnlineSecurity": "Yes",
+      "OnlineBackup": "Yes",
+      "DeviceProtection": "Yes",
+      "TechSupport": "Yes",
+      "StreamingTV": "Yes",
+      "StreamingMovies": "Yes",
+      "Contract": "Two year",
+      "PaperlessBilling": "No",
+      "PaymentMethod": "Credit card (automatic)",
+      "MonthlyCharges": 88.7,
+      "TotalCharges": 6501.35
+    },
+    {
+      "gender": "Male",
+      "SeniorCitizen": "No",
+      "Partner": "No",
+      "Dependents": "Yes",
+      "tenure": 61,
+      "PhoneService": "Yes",
+      "MultipleLines": "No",
+      "InternetService": "No",
+      "OnlineSecurity": "No internet service",
+      "OnlineBackup": "No internet service",
+      "DeviceProtection": "No internet service",
+      "TechSupport": "No internet service",
+      "StreamingTV": "No internet service",
+      "StreamingMovies": "No internet service",
+      "Contract": "Two year",
+      "PaperlessBilling": "No",
+      "PaymentMethod": "Mailed check",
+      "MonthlyCharges": 19.75,
+      "TotalCharges": 1124.2
+    },
+    {
+      "gender": "Male",
+      "SeniorCitizen": "No",
+      "Partner": "Yes",
+      "Dependents": "Yes",
+      "tenure": 64,
+      "PhoneService": "Yes",
+      "MultipleLines": "No",
+      "InternetService": "No",
+      "OnlineSecurity": "No internet service",
+      "OnlineBackup": "No internet service",
+      "DeviceProtection": "No internet service",
+      "TechSupport": "No internet service",
+      "StreamingTV": "No internet service",
+      "StreamingMovies": "No internet service",
+      "Contract": "Two year",
+      "PaperlessBilling": "Yes",
+      "PaymentMethod": "Bank transfer (automatic)",
+      "MonthlyCharges": 19.7,
+      "TotalCharges": 1274.05
+    },
+    {
+      "gender": "Male",
+      "SeniorCitizen": "No",
+      "Partner": "No",
+      "Dependents": "No",
+      "tenure": 72,
+      "PhoneService": "Yes",
+      "MultipleLines": "No",
+      "InternetService": "No",
+      "OnlineSecurity": "No internet service",
+      "OnlineBackup": "No internet service",
+      "DeviceProtection": "No internet service",
+      "TechSupport": "No internet service",
+      "StreamingTV": "No internet service",
+      "StreamingMovies": "No internet service",
+      "Contract": "Two year",
+      "PaperlessBilling": "Yes",
+      "PaymentMethod": "Credit card (automatic)",
+      "MonthlyCharges": 19.8,
+      "TotalCharges": 1468.75
+    },
+    {
+      "gender": "Female",
+      "SeniorCitizen": "No",
+      "Partner": "No",
+      "Dependents": "No",
+      "tenure": 11,
+      "PhoneService": "Yes",
+      "MultipleLines": "Yes",
+      "InternetService": "DSL",
+      "OnlineSecurity": "No",
+      "OnlineBackup": "No",
+      "DeviceProtection": "No",
+      "TechSupport": "No",
+      "StreamingTV": "No",
+      "StreamingMovies": "Yes",
+      "Contract": "Month-to-month",
+      "PaperlessBilling": "Yes",
+      "PaymentMethod": "Mailed check",
+      "MonthlyCharges": 58.95,
+      "TotalCharges": 601.6
+    },
+    {
+      "gender": "Female",
+      "SeniorCitizen": "No",
+      "Partner": "Yes",
+      "Dependents": "No",
+      "tenure": 62,
+      "PhoneService": "Yes",
+      "MultipleLines": "Yes",
+      "InternetService": "No",
+      "OnlineSecurity": "No internet service",
+      "OnlineBackup": "No internet service",
+      "DeviceProtection": "No internet service",
+      "TechSupport": "No internet service",
+      "StreamingTV": "No internet service",
+      "StreamingMovies": "No internet service",
+      "Contract": "Two year",
+      "PaperlessBilling": "No",
+      "PaymentMethod": "Bank transfer (automatic)",
+      "MonthlyCharges": 23.65,
+      "TotalCharges": 1416.75
+    },
+    {
+      "gender": "Male",
+      "SeniorCitizen": "Yes",
+      "Partner": "No",
+      "Dependents": "No",
+      "tenure": 19,
+      "PhoneService": "Yes",
+      "MultipleLines": "Yes",
+      "InternetService": "Fiber optic",
+      "OnlineSecurity": "No",
+      "OnlineBackup": "No",
+      "DeviceProtection": "Yes",
+      "TechSupport": "No",
+      "StreamingTV": "No",
+      "StreamingMovies": "No",
+      "Contract": "Month-to-month",
+      "PaperlessBilling": "Yes",
+      "PaymentMethod": "Electronic check",
+      "MonthlyCharges": 79.85,
+      "TotalCharges": 1471.75
+    },
+    {
+      "gender": "Female",
+      "SeniorCitizen": "No",
+      "Partner": "Yes",
+      "Dependents": "Yes",
+      "tenure": 58,
+      "PhoneService": "Yes",
+      "MultipleLines": "No",
+      "InternetService": "DSL",
+      "OnlineSecurity": "No",
+      "OnlineBackup": "No",
+      "DeviceProtection": "No",
+      "TechSupport": "No",
+      "StreamingTV": "No",
+      "StreamingMovies": "No",
+      "Contract": "One year",
+      "PaperlessBilling": "Yes",
+      "PaymentMethod": "Mailed check",
+      "MonthlyCharges": 44.1,
+      "TotalCharges": 2413.05
+    },
+    {
+      "gender": "Male",
+      "SeniorCitizen": "No",
+      "Partner": "No",
+      "Dependents": "No",
+      "tenure": 1,
+      "PhoneService": "Yes",
+      "MultipleLines": "No",
+      "InternetService": "No",
+      "OnlineSecurity": "No internet service",
+      "OnlineBackup": "No internet service",
+      "DeviceProtection": "No internet service",
+      "TechSupport": "No internet service",
+      "StreamingTV": "No internet service",
+      "StreamingMovies": "No internet service",
+      "Contract": "Month-to-month",
+      "PaperlessBilling": "No",
+      "PaymentMethod": "Mailed check",
+      "MonthlyCharges": 20.8,
+      "TotalCharges": 20.8
+    },
+    {
+      "gender": "Female",
+      "SeniorCitizen": "No",
+      "Partner": "No",
+      "Dependents": "No",
+      "tenure": 8,
+      "PhoneService": "Yes",
+      "MultipleLines": "No",
+      "InternetService": "DSL",
+      "OnlineSecurity": "No",
+      "OnlineBackup": "No",
+      "DeviceProtection": "No",
+      "TechSupport": "No",
+      "StreamingTV": "No",
+      "StreamingMovies": "No",
+      "Contract": "Month-to-month",
+      "PaperlessBilling": "No",
+      "PaymentMethod": "Mailed check",
+      "MonthlyCharges": 44.45,
+      "TotalCharges": 369.3
+    }
+  ],
+  "model_name": "Logistic Regression",
+  "comparison": [
+    {
+      "model": "Random Forest",
+      "ROC-AUC": 0.8480025450952322,
+      "F1": 0.5777156916528994,
+      "Accuracy": 0.8047591729563862
+    },
+    {
+      "model": "Gradient Boosting",
+      "ROC-AUC": 0.84791248054552,
+      "F1": 0.5861922960573104,
+      "Accuracy": 0.8024520055917957
+    },
+    {
+      "model": "Logistic Regression",
+      "ROC-AUC": 0.8460972735038241,
+      "F1": 0.5938023065747874,
+      "Accuracy": 0.8028062997536647
+    }
+  ],
+  "test_metrics": {
+    "ROC-AUC": 0.8420031517218217,
+    "Accuracy": 0.8026969481902059,
+    "Precision": 0.6509433962264151,
+    "Recall": 0.553475935828877,
+    "F1": 0.5982658959537572
+  },
+  "metric_formats": {
+    "Accuracy": "percent",
+    "Precision": "percent",
+    "Recall": "percent",
+    "F1": "percent"
+  },
+  "figures": [
+    {
+      "src": "assets/churn_by_contract.png",
+      "caption": "Month-to-month customers churn far more often."
+    },
+    {
+      "src": "assets/feature_importance.png",
+      "caption": "What drives the prediction the most."
+    },
+    {
+      "src": "assets/roc_curve.png",
+      "caption": "ROC curve on the test set."
+    },
+    {
+      "src": "assets/confusion_matrix.png",
+      "caption": "Correct and wrong predictions on the test set."
+    }
+  ],
+  "steps": [
+    "Cleaned 7,043 customer records (IBM Telco dataset): fixed blank charges for new customers.",
+    "Built one scikit-learn Pipeline: scaling for numbers, one-hot encoding for categories.",
+    "Compared Logistic Regression, Random Forest and Gradient Boosting with 5-fold stratified cross-validation.",
+    "Picked Logistic Regression by ROC-AUC and evaluated it once on a held-out 20% test set.",
+    "Explained it with permutation feature importance.",
+    "Exported the whole pipeline to ONNX so it runs in the browser \u2014 no server needed."
+  ],
+  "dataset": {
+    "name": "IBM Telco Customer Churn",
+    "url": "https://github.com/IBM/telco-customer-churn-on-icp4d",
+    "rows": 7043
+  },
+  "repo_url": "https://github.com/ravshanovna-d/telco-churn-predictor",
+  "notebook_url": "https://github.com/ravshanovna-d/telco-churn-predictor/blob/main/notebook.ipynb",
+  "footer": "Built by <a href=\"https://github.com/ravshanovna-d\">ravshanovna-d</a>"
+}
