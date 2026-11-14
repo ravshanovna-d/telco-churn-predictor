@@ -2,7 +2,7 @@
 
 Predicts how likely a telecom customer is to cancel their subscription, so a retention team can contact the right people first.
 
-**[Live demo →](LIVE_DEMO_URL)** — fill in a customer profile and get a churn probability instantly. The model runs in your browser (ONNX Runtime Web), no server needed.
+**[Live demo →](https://ravshanovna-churn.vercel.app)** — fill in a customer profile and get a churn probability instantly. The model runs in your browser (ONNX Runtime Web), no server needed.
 
 ![Churn rate by contract](web/assets/churn_by_contract.png)
 
